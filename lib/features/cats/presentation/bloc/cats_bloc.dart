@@ -1,26 +1,33 @@
+import 'package:cats_app/features/cats/domain/use_cases/fetch_cats.dart';
+import 'package:cats_app/features/cats/domain/use_cases/filter_cats.dart';
+import 'package:cats_app/features/cats/domain/use_cases/get_details.dart';
+import 'package:cats_app/features/cats/domain/use_cases/sort_cats.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/cat_entity.dart';
-import '../../domain/repositories/cats_repository.dart';
 
 part 'cats_event.dart';
 part 'cats_state.dart';
 
 class CatsBloc extends Bloc<CatsEvent, CatsState> {
-  final CatsRepository _repository;
+  final FetchCatsUseCase _fetchCatsUseCase;
+  final FilterCatsUseCase _filterCatsUseCase;
+  final SortCatsUseCase _sortCatsUseCase;
+  final GetDetailsUseCase _getDetailsUseCase;
 
-  CatsBloc(this._repository) : super(CatsInitial()) {
-    // Mapeamos el evento FetchCats a la función _onFetchCats
-    on<FetchCats>(_onFetchCats);
-  }
-
-  Future<void> _onFetchCats(FetchCats event, Emitter<CatsState> emit) async {
-    emit(CatsLoading());
-    try {
-      final cats = await _repository.fetchCats();
-      emit(CatsLoaded(cats));
-    } catch (e) {
-      // El mensaje del interceptor se propaga hasta aquí
-      emit(CatsError(e.toString()));
-    }
+  CatsBloc(
+    this._fetchCatsUseCase,
+    this._filterCatsUseCase,
+    this._sortCatsUseCase,
+    this._getDetailsUseCase,
+  ) : super(CatsInitial()) {
+    on<FetchCats>((event, emit) async {
+      emit(CatsLoading());
+      try {
+        final cats = await _fetchCatsUseCase();
+        emit(CatsLoaded(cats));
+      } catch (e) {
+        emit(CatsError("Failed to fetch cats: $e"));
+      }
+    });
   }
 }

@@ -1,6 +1,6 @@
+import 'package:cats_app/features/cats/presentation/bloc/cats_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/cats_bloc.dart';
 
 class CatsPage extends StatefulWidget {
   const CatsPage({super.key});
@@ -19,23 +19,30 @@ class _CatsPageState extends State<CatsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cat Breeds BLoC')),
       body: BlocBuilder<CatsBloc, CatsState>(
         builder: (context, state) {
-          return switch (state) {
-            CatsInitial() => const Center(child: Text('Iniciando...')),
-            CatsLoading() => const Center(child: CircularProgressIndicator()),
-            CatsLoaded(cats: var catsList) => ListView.builder(
-              itemCount: catsList.length,
+          if (state is CatsInitial) {
+            return const Center(child: Text('App initialized'));
+          }
+          if (state is CatsLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (state is CatsLoaded) {
+            return ListView.builder(
+              itemCount: state.cats.length,
               itemBuilder: (context, index) {
-                final cat = catsList[index];
-                return Text(cat.name, style: const TextStyle(fontSize: 18));
+                final cat = state.cats[index];
+                return ListTile(title: Text(cat.name));
               },
-            ),
-            CatsError(message: var errorMsg) => Center(
-              child: Text(errorMsg, style: const TextStyle(color: Colors.red)),
-            ),
-          };
+            );
+          }
+
+          if (state is CatsError) {
+            return Center(child: Text(state.message));
+          }
+
+          return Container();
         },
       ),
     );
