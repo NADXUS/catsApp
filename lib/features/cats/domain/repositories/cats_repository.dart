@@ -1,4 +1,4 @@
-import 'package:cats_app/features/cats/domain/entities/cat.dart';
+import 'package:cats_app/features/cats/domain/entities/cat_entity.dart';
 
 abstract class CatsRepository {
   Future<List<CatEntity>> fetchCats();

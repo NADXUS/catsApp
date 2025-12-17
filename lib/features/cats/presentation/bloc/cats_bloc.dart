@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/cat.dart';
+import '../../domain/entities/cat_entity.dart';
 import '../../domain/repositories/cats_repository.dart';
 
-part 'cats_event.dart'; // Declara el archivo de eventos como parte
-part 'cats_state.dart'; // Declara el archivo de estados como parte
+part 'cats_event.dart';
+part 'cats_state.dart';
 
 class CatsBloc extends Bloc<CatsEvent, CatsState> {
   final CatsRepository _repository;

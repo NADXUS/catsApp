@@ -18,15 +18,6 @@ class _CatsPageState extends State<CatsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const CatsView();
-  }
-}
-
-class CatsView extends StatelessWidget {
-  const CatsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Cat Breeds BLoC')),
       body: BlocBuilder<CatsBloc, CatsState>(
