@@ -83,7 +83,7 @@ class BreedCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "origin: ${cat.origin}",
+                    "origin: ${cat.origin.length > 10 ? "${cat.origin.substring(0, 10)}..." : cat.origin}",
                     style: const TextStyle(fontSize: 20),
                   ),
                   Text(
