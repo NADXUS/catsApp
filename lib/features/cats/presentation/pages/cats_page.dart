@@ -37,7 +37,9 @@ class _CatsPageState extends State<CatsPage> {
                 return BreedCard(
                   breedName: state.cats[index].name,
                   imageUrl: state.cats[index].imageUrl,
-                  origin: state.cats[index].origin,
+                  origin: state.cats[index].origin.length > 10
+                      ? state.cats[index].origin.substring(0, 10) + "..."
+                      : state.cats[index].origin,
                   intelligence: state.cats[index].intelligence,
                 );
               },

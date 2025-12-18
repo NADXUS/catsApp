@@ -35,9 +35,34 @@ class BreedCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(breedName, style: const TextStyle(fontSize: 20)),
-                  Text(
-                    "Ver mas",
-                    style: TextStyle(fontSize: 16, color: Colors.blueAccent),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      side: const BorderSide(
+                        color: Color.fromARGB(255, 0, 0, 255),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        10.0,
+                        4.0,
+                        10.0,
+                        4.0,
+                      ), // Ajusta el padding horizontal(8.0),
+                      child: Text(
+                        "Ver mas",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -46,7 +71,7 @@ class BreedCard extends StatelessWidget {
               SizedBox(height: 8.0),
               Image.network(
                 imageUrl,
-                height: 200,
+                height: 260,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
