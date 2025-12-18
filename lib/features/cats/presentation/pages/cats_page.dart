@@ -1,4 +1,5 @@
 import 'package:cats_app/features/cats/presentation/bloc/cats_bloc.dart';
+import 'package:cats_app/features/cats/presentation/widgets/breed_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,8 +33,13 @@ class _CatsPageState extends State<CatsPage> {
             return ListView.builder(
               itemCount: state.cats.length,
               itemBuilder: (context, index) {
-                final cat = state.cats[index];
-                return ListTile(title: Text(cat.name));
+                /* final cat = state.cats[index]; */
+                return BreedCard(
+                  breedName: state.cats[index].name,
+                  imageUrl: state.cats[index].imageUrl,
+                  origin: state.cats[index].origin,
+                  intelligence: state.cats[index].intelligence,
+                );
               },
             );
           }

@@ -9,10 +9,10 @@ class CatsRepositoryImpl implements CatsRepository {
   CatsRepositoryImpl({required this.remoteDatasource});
 
   @override
-  Future<List<CatEntity>> fetchCats() {
+  Future<List<CatEntity>> fetchCats() async {
     try {
-      final response = remoteDatasource.fetchCats();
-      return response;
+      final responseCats = await remoteDatasource.fetchCats();
+      return responseCats;
     } on DioException catch (dioError) {
       if (dioError.type == DioExceptionType.connectionTimeout) {
         throw ServerError('Connection Timeout, please try again.');
@@ -23,7 +23,7 @@ class CatsRepositoryImpl implements CatsRepository {
 
       throw ServerError('Something went wrong, please try again.');
     } catch (e) {
-      throw ServerError('Something went wrong, please try again.');
+      throw ServerError('Something went wrong, please try again. $e');
     }
   }
 
