@@ -1,4 +1,4 @@
-part of 'cats_bloc.dart'; // Apunta al nuevo padre Bloc
+part of 'cats_bloc.dart';
 
 sealed class CatsState {}
 

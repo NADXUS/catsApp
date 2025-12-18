@@ -1,18 +1,11 @@
+import 'package:cats_app/features/cats/domain/entities/cat_entity.dart';
+import 'package:cats_app/features/cats/presentation/cat_detail/pages/cat_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class BreedCard extends StatelessWidget {
-  final String breedName;
-  final String imageUrl;
-  final String origin;
-  final String intelligence;
+  final CatEntity cat;
 
-  const BreedCard({
-    Key? key,
-    required this.breedName,
-    required this.imageUrl,
-    required this.origin,
-    required this.intelligence,
-  }) : super(key: key);
+  const BreedCard({Key? key, required this.cat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +27,17 @@ class BreedCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(breedName, style: const TextStyle(fontSize: 20)),
+                  Text(cat.name, style: const TextStyle(fontSize: 20)),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          // Pasas el gato directamente, sin pedir nada nuevo a internet
+                          builder: (context) => CatDetailPage(cat: cat),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       elevation: 0,
@@ -70,7 +71,7 @@ class BreedCard extends StatelessWidget {
               const Divider(),
               SizedBox(height: 8.0),
               Image.network(
-                imageUrl,
+                cat.imageUrl,
                 height: 260,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -81,9 +82,12 @@ class BreedCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("origin: $origin", style: const TextStyle(fontSize: 20)),
                   Text(
-                    "intelligence: $intelligence",
+                    "origin: ${cat.origin}",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    "intelligence: ${cat.intelligence}",
                     style: TextStyle(
                       fontSize: 20,
                       color: const Color.fromARGB(255, 0, 0, 0),

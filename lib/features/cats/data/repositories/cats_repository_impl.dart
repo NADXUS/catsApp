@@ -28,20 +28,21 @@ class CatsRepositoryImpl implements CatsRepository {
   }
 
   @override
-  Future<List<CatEntity>> filterCats(String breed, String age, String gender) {
-    // TODO: implement filterCats
-    throw UnimplementedError();
-  }
+  Future<List<CatEntity>> filterCats(
+    String breed,
+    List<CatEntity> allCats,
+  ) async {
+    if (breed.isEmpty) {
+      return allCats;
+    }
 
-  @override
-  Future<List<CatEntity>> getDetails(String idCat) {
-    // TODO: implement getDetails
-    throw UnimplementedError();
-  }
+    final filteredList = allCats.where((cat) {
+      final nameLower = cat.name.toLowerCase();
+      final searchLower = breed.toLowerCase();
 
-  @override
-  Future<List<CatEntity>> sortCats(String sort) {
-    // TODO: implement sortCats
-    throw UnimplementedError();
+      return nameLower.contains(searchLower);
+    }).toList();
+
+    return filteredList;
   }
 }

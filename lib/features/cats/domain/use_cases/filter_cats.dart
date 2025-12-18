@@ -6,7 +6,7 @@ class FilterCatsUseCase {
 
   FilterCatsUseCase(this.repository);
 
-  Future<List<CatEntity>> call(String breed, String age, String gender) async {
-    return await repository.filterCats(breed, age, gender);
+  Future<List<CatEntity>> call(String breed, List<CatEntity> allCats) async {
+    return await repository.filterCats(breed, allCats);
   }
 }

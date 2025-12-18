@@ -1,9 +1,10 @@
-import 'package:cats_app/features/cats/presentation/bloc/cats_bloc.dart';
+import 'package:cats_app/features/cats/presentation/cat_detail/pages/cat_detail_page.dart';
+import 'package:cats_app/features/cats/presentation/cats_list/bloc/cats_bloc.dart';
 import 'package:cats_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'features/cats/presentation/pages/cats_page.dart';
+import 'features/cats/presentation/cats_list/pages/cats_page.dart';
 
 void main() async {
   await init();
@@ -17,9 +18,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => GetIt.instance<CatsBloc>()),
+        BlocProvider(
+          create: (context) => GetIt.instance<CatsBloc>()..add(FetchCats()),
+        ),
       ],
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: CatsPage()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        // 1. Definimos la página inicial
+        initialRoute: '/',
+        // 2. Definimos el "mapa" de rutas
+        routes: {
+          '/': (context) => const CatsPage(),
+          '/detail': (context) => const CatDetailPage(),
+        },
+      ),
     );
   }
 }
