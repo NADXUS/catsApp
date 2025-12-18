@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => GetIt.instance<CatsBloc>()),
       ],
-      child: MaterialApp(title: 'Cat App BLoC Compacto', home: CatsPage()),
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: CatsPage()),
     );
   }
 }

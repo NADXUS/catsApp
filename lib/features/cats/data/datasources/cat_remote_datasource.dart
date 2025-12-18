@@ -16,7 +16,7 @@ class CatRemoteDatasourceImplement implements CatRemoteDatasource {
 
   @override
   Future<List<CatEntity>> fetchCats() async {
-    final responseCats = await client.dio.get('/breeds?limit=20');
+    final responseCats = await client.dio.get('/breeds?limit=30');
     return responseCats.data['data']
         .map<CatModel>((e) => CatModel.fromJson(e))
         .toList();
