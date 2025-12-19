@@ -28,7 +28,7 @@ class _SearchFilterState extends State<SearchFilter> {
   Widget build(BuildContext context) {
     return Container(
       height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
