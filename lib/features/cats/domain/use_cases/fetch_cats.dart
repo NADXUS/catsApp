@@ -7,6 +7,10 @@ class FetchCatsUseCase {
   FetchCatsUseCase(this.repository);
 
   Future<List<CatEntity>> call() async {
-    return await repository.fetchCats();
+    try {
+      return await repository.fetchCats();
+    } catch (e) {
+      return [];
+    }
   }
 }
