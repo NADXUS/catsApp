@@ -24,9 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // 1. Definimos la página inicial
         initialRoute: '/',
-        // 2. Definimos el "mapa" de rutas
         routes: {
           '/': (context) => const CatsPage(),
           '/detail': (context) => const CatDetailPage(),

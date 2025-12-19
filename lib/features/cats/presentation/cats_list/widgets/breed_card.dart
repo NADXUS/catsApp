@@ -33,7 +33,6 @@ class BreedCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          // Pasas el gato directamente, sin pedir nada nuevo a internet
                           builder: (context) => CatDetailPage(cat: cat),
                         ),
                       );
@@ -50,12 +49,7 @@ class BreedCard extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        10.0,
-                        4.0,
-                        10.0,
-                        4.0,
-                      ), // Ajusta el padding horizontal(8.0),
+                      padding: const EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 4.0),
                       child: Text(
                         "Ver mas",
                         style: TextStyle(
